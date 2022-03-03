@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+<% block head_title %> Post <% endblock head_title %>
+
+{%block content%}
+    <h5> Пользователь {{request.user.username}}</h5>
+    <br>
+    <h1> Объявление </h1>
+    <h5>Заголовок : {{post.title}}</h5>
+    <h5>Автор &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : {{post.user}}</h5>
+    <h5>Категория : {{post.category}}</h5>
+    <h5>Дата &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : {{post.time_stamp|date:'M d Y' }}</h5>
+    <h5>Время &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : {{post.time_stamp|time:"H:i" }}</h5>
+    {% if link %}
+        <h5>Файл &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp : {{link}}</h5>
+    {% endif %}
+
+    <br>
+    {% if is_author %}
+        <button> <a href="{% url 'post_update' post.pk %}">Редактировать</a> </button>
+    {% else %}
+        <button> <a href="{% url 'new_comment' post.pk %}">Дать отзыв</a> </button>
+    {% endif %}
+    <br>
+
+    <br>
+    <h5>Текст &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : {{post.text}}</h5>
+
+ {% endblock content %}

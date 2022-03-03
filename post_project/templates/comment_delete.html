@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+<% block head_title %> Comment <% endblock head_title %>
+
+{%block content%}
+    <h5> Пользователь {{request.user.username}}</h5>
+    <br>
+    <h1>Вы действительно хотите удалить данный отзыв?</h1>
+    <h5>Дал отзыв &nbsp;&nbsp;&nbsp;&nbsp; : {{comment.user}}</h5>
+    <h5>Дата &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : {{comment.time_stamp|date:'M d Y' }}</h5>
+    <h5>Время &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : {{comment.time_stamp|time:"H:i" }}</h5>
+    <br>
+    <h5>Объявление &nbsp;: {{comment.post.title}}</h5>
+    <h5>Его автор &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{comment.post.user}}</h5>
+    <br>
+    <br>
+    <br>
+    <h5>Текст отзыва&nbsp;&nbsp;: {{comment.text}}</h5>
+    <form method="POST">
+    {% csrf_token %}
+    <input type="submit" value="подтвердить"></form>
+
+{% endblock content %}
+

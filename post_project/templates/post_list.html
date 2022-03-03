@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+<% block head_title %> Posts <% endblock head_title %>
+
+{%block content%}
+     <br>
+    <h5> Пользователь {{request.user.username}}</h5>
+    <br>
+    <h3> Объявления </h3>
+    <br>
+    {% if posts %}
+        <table>
+             <tr>
+                 <td width="10%">
+                    <h5>Автор</h5>
+                 </td>
+                  <td width="15%">
+                    <h5>Заголовок</h5>
+                </td>
+                <td width="15%">
+                    <h5>Категория</h5>
+                </td>
+                <td width="15%">
+                    <h5>Дата</h5>
+                </td>
+                <td width="10%">
+                    <h5>Время</h5>
+                </td>
+                <td width="30%">
+                    <h5>Текст</h5>
+                </td>
+               </tr>
+            {% for post in posts %}
+            <tr>
+                <td>
+                    <h5>{{post.user}}</h5>
+                </td>
+                <td>
+                    <h5>{{post.title}}</h5>
+                 </td>
+                 <td>
+                    <h5>{{post.category}}</h5>
+                 </td>
+                 <td>
+                    <h5>{{post.time_stamp | date:'M d Y' }}</h5>
+                </td>
+                 <td>
+                    <h5>{{post.time_stamp | time:"H:i" }}</h5>
+                </td>
+                <td>
+                    <h5>{{post.text | truncatechars:30}}</h5>
+                </td>
+                <td width="30%">
+                    <h5><a href="{% url 'post' post.id %}">Открыть</a></h5>
+                </td>
+             </tr>
+            {% endfor %}
+        </table>
+     {% else %}
+        <h2> Объявлений нет </h2>
+    {% endif %}
+    <br>
+    <br>
+  <button> <a href="{% url 'new_post'%}">Новое объявление</a></button>
+ {% endblock content %}

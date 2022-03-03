@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+<% block head_title %> Главная страница <% endblock head_title %>
+
+{%block content%}
+<br>
+<h3> Главная страница </h3>
+<br>
+<button> <a href="{% url 'logout'%}">Выйти</a> </button>
+<br>
+<br>
+<h5> Пользователь {{request.user.username}}</h5>
+<br>
+<h5><a href="{% url 'post_list'%}">Обявления</a></h5>
+<br>
+<h5><a href="{% url 'comment_list'%}">Отзывы</a></h5>
+{% endblock content %}

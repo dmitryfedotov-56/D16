@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %} Create comment {% endblock title %}
+
+{% block content %}
+<br>
+<br>
+<h3>Отзыв на объявление "{{post_title}}"</h3>
+<form method="POST">
+     {% csrf_token %}
+     {% for field in form %}
+        <div class="form-group">
+            {{field.label_tag}}
+            <div>{{field}}</div>
+        </div>
+    {% endfor %}
+    <br>
+    <br>
+    <input type="submit" value="Создать">
+</form>
+{% endblock content %}

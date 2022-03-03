@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+<% block head_title %> Posts <% endblock head_title %>
+
+{%block content%}
+    <br>
+    <h5> Пользователь {{request.user.username}} </h5>
+    <br>
+    <h1> Отзывы </h1>
+    <br>
+   {% if comments %}
+      <form method="GET">
+            {{ filter.form }}
+            <input type="submit" value="Найти">
+      </form>
+      <br>
+      <table>
+         <tr>
+             <td width="10%">
+                <h5>Дал отзыв</h5>
+             </td>
+             <td width="15%">
+                 <h5>Объявление</h5>
+             </td>
+             <td width="15%">
+                <h5>Дата</h5>
+             </td>
+             <td width="10%">
+                <h5>Время</h5>
+             </td>
+             <td width="30%">
+                 <h5>Текст</h5>
+             </td>
+         </tr>
+         {% for comment in filter.qs %}
+            <tr>
+                <td>
+                    <h5>{{comment.user}}</h5>
+                </td>
+                <td>
+                    <h5>{{comment.post.title}}</h5>
+                 </td>
+                 <td>
+                    <h5>{{comment.time_stamp | date:'M d Y' }}</h5>
+                </td>
+                 <td>
+                    <h5>{{comment.time_stamp | time:"H:i" }}</h5>
+                </td>
+                <td>
+                    <h5>{{comment.text | truncatechars:30}}</h5>
+                </td>
+                <td width="10%">
+                    <h5><a href="{% url 'comment' comment.id %}">Открыть</a></h5>
+                </td>
+                <td width="10%">
+                    <h5><a href="{% url 'comment_delete' comment.id %}">Удалить</a></h5>
+                </td>
+                <td width="10%">
+                    {% if comment.status %}
+                        <h5>Принято</h5>
+                    {% else %}
+                        <h5><a href="{% url 'accept' comment.id %}">Принять</a></h5>
+                    {% endif %}
+                </td>
+             </tr>
+         {% endfor %}
+      </table>
+     {% else %}
+        <h2> Отзывов нет </h2>
+    {% endif %}
+    <br>
+{% endblock content %}

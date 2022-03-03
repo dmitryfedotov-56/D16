@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> Новые объявления </h1>
+    <br>
+    {% if new_posts %}
+         <table>
+            <tr>
+            <td width="25%">
+                Название
+              </td>
+            <td width="25%">
+                Дата
+            </td>
+             </tr>
+            {% for post in new_posts %}
+            <tr>
+                <td>
+                   <a href="http://127.0.0.1:8000/post/{{post.id}}">{{ post.title }}</a>
+                </td>
+                <td>
+                    {{ post.time_stamp|date:'M d Y' }}
+                    {{ post.time_stamp|time:"H:i" }}
+                </td>
+
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <h2> Новых постов нет </h2>
+    {% endif %}
+</body>
+</html>
